@@ -92,7 +92,8 @@ app.get('/student/:id',(req,res)=>{
 
 //Updating rows
 app.get('/update/:id',(req,res)=>{
-   let update = "Updated Name";
+//    let update = "Updated Name";
+      let update = req.body.name;
    console.log(req.params.id)
     let sql = `UPDATE students SET name ='${update}' WHERE id =${req.params.id}`;
     db.query(sql,err=>{
