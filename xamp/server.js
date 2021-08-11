@@ -47,7 +47,7 @@ app.get('/createDB',(req,res)=>{
 
 
 app.get('/createtable',(req,res)=>{
-    let sql = "CREATE TABLE students(id int , name VARCHAR(200))"
+    let sql = "CREATE TABLE students(id int AUTO_INCREMENT, name VARCHAR(200), PRIMARY KEY(id))"
     db.query(sql,(err)=>{
         if(err){
             console.log(err)
