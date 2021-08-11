@@ -82,6 +82,33 @@ app.get('/all',(req,res)=>{
         }
     }) 
 })
+app.get('/update/:id',(req,res)=>{
+   let update = "Updated Name";
+   console.log(req.params.id)
+    let sql = `UPDATE students SET name ='${update}' WHERE id =${req.params.id}`;
+    db.query(sql,err=>{
+        if(err){
+            console.log(err)
+        }
+        else {
+            res.send("Updated");
+        }
+    }) 
+})
+
+app.get('/delete/:id',(req,res)=>{
+    // console.log(req.params.id)
+     let sql = `DELETE FROM students WHERE id =${req.params.id}`;
+     db.query(sql,err=>{
+         if(err){
+             console.log(err)
+         }
+         else {
+             res.send("Deleted");
+         }
+     }) 
+ })
+
 app.listen(3000,()=>{
     console.log("server started at 3000")
 })
