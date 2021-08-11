@@ -6,7 +6,8 @@ const mysql = require("mysql");
 const db = mysql.createConnection({
     host:"localhost",
     user:"root",
-    password:""
+    password:"",
+    database:"dbm"
 });
 
 db.connect((err)=>{
@@ -16,4 +17,71 @@ db.connect((err)=>{
     else {
         console.log("DB Connected")
     }
+});
+
+const app = express();
+
+app.get('/createDB',(req,res)=>{
+    let sql = "CREATE DATABASE dbm";
+    db.query(sql,(err)=>{
+        if(err){
+            console.log(err)
+        }
+        else {
+            res.send("DATABASE CREATED");
+        }
+    })
+})
+
+app.get('/createDB',(req,res)=>{
+    let sql = "CREATE DATABASE dbm";
+    db.query(sql,(err)=>{
+        if(err){
+            console.log(err)
+        }
+        else {
+            res.send("DATABASE CREATED");
+        }
+    })
+})
+
+
+app.get('/createtable',(req,res)=>{
+    let sql = "CREATE TABLE students(id int , name VARCHAR(200))"
+    db.query(sql,(err)=>{
+        if(err){
+            console.log(err)
+        }
+        else {
+            res.send("TABLE CREATED");
+        }
+    }) 
+})
+
+app.get('/add',(req,res)=>{
+    let add = {id:1,name:"IRFAN"};
+    let sql = "INSERT INTO students SET ?";
+    db.query(sql,add,(err)=>{
+        if(err){
+            console.log(err)
+        }
+        else {
+            res.send("ADDED");
+        }
+    }) 
+})
+
+app.get('/all',(req,res)=>{
+    let sql = "SELECT * FROM students";
+    db.query(sql,(err,results)=>{
+        if(err){
+            console.log(err)
+        }
+        else {
+            res.send(results);
+        }
+    }) 
+})
+app.listen(3000,()=>{
+    console.log("server started at 3000")
 })
